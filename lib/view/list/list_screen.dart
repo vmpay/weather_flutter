@@ -1,18 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_triple/flutter_triple.dart';
+import 'package:weather_flutter_architecture/middleware/weather_list_store.dart';
+import 'package:weather_flutter_architecture/repository/weather_list_response.dart';
+import 'package:weather_flutter_architecture/view/list/empty_list_widget.dart';
+import 'package:weather_flutter_architecture/view/list/weather_list_widget.dart';
 
 import 'custom_wave_painter.dart';
-import 'weather_list_widget.dart';
 
 class ListScreen extends StatelessWidget {
-  const ListScreen({Key? key}) : super(key: key);
+  ListScreen({Key? key}) : super(key: key);
+  final WeatherListStore _weatherListStore = WeatherListStore(const []);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          const WeatherListWidget(),
+          ScopedBuilder(
+            store: _weatherListStore,
+            onState: (context, List<ListElement> state) => state.isEmpty
+                ? const EmptyListWidget()
+                : WeatherListWidget(state),
+            onError: (context, error) => Center(
+              child: Text(
+                error.toString(),
+                style: const TextStyle(color: Colors.blue),
+              ),
+            ),
+            onLoading: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
           Container(
             alignment: Alignment.bottomCenter,
             child: CustomPaint(
@@ -62,7 +81,7 @@ class ListScreen extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         child: FloatingActionButton(
           onPressed: () {
-            print('Click!');
+            _weatherListStore.requestWeatherList();
           },
           child: const Icon(Icons.add),
           backgroundColor: const Color(0xFF4493ff),

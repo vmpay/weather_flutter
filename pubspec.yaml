@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.4
+  flutter_triple: ^1.2.5
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

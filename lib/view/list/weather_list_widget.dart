@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:weather_flutter_architecture/repository/weather_list_response.dart';
 
 import 'weather_list_card_widget.dart';
 
 class WeatherListWidget extends StatelessWidget {
-  const WeatherListWidget({Key? key}) : super(key: key);
+  const WeatherListWidget(this._list, {Key? key}) : super(key: key);
+  final List<ListElement> _list;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -13,8 +15,7 @@ class WeatherListWidget extends StatelessWidget {
           // crossAxisCount is the number of columns
           crossAxisCount: 2,
           // This creates two columns with two items in each column
-          children:
-              List.generate(20, (int index) => WeatherListCardWidget(index)),
+          children: _list.map((e) => WeatherListCardWidget(e)).toList(),
         ),
       );
 }
