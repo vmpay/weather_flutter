@@ -29,6 +29,7 @@ class WeatherListCardWidget extends StatelessWidget {
                 width: double.infinity,
                 child: Image.asset(mapStringToAsset(element.weather?[0].icon)),
               ),
+              Expanded(child: Container()),
               Text(
                 '${element.name}',
                 style: const TextStyle(

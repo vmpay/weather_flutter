@@ -23,21 +23,25 @@ class EmptyListWidget extends StatelessWidget {
               width: double.infinity,
               child: Image.asset('assets/graphics/sun.png'),
             ),
-            Expanded(child: Container()),
-            const Text(
-              'To add your\nfirst location',
-              style: TextStyle(fontSize: 32),
-            ),
-            RichText(
-              text: const TextSpan(
-                text: 'click +',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 32,
-                    color: Colors.black),
+            Expanded(
+              child: RichText(
+                text: const TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'click +',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 32,
+                            color: Colors.black),
+                      )
+                    ],
+                    text: 'To add your\nfirst location\n',
+                    style: TextStyle(
+                      fontSize: 32,
+                      color: Colors.black,
+                    )),
               ),
             ),
-            Expanded(child: Container()),
             Container(
               alignment: Alignment.bottomRight,
               margin: const EdgeInsets.only(bottom: 40),

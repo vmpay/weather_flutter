@@ -16,7 +16,7 @@ class WeatherListStore extends StreamStore<Exception, List<ListElement>> {
     if (_calls < 2) {
       update(value);
     } else if (_calls < 5) {
-      update([buildListElement()]);
+      update(buildWeatherListResponse().list ?? []);
     } else {
       setError(Exception('Error: state not can be > 4'));
     }

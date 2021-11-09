@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_flutter_architecture/view/list/list_screen.dart';
+
+import 'view/details/details_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,8 +19,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const SplashScreen(),
-      home: ListScreen(),
-      // home: const DetailsScreen(),
+      // home: ListScreen(),
+      home: DetailsScreen('Warsaw', 'Poland', 52.2298, 21.0118),
     );
   }
 }
