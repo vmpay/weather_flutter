@@ -53,19 +53,28 @@ class WeatherDetailsStore
           _hourFormat.format(DateTime.fromMillisecondsSinceEpoch(
               response.current.sunset! * 1000))))
       ..add(AdditionalInfo('', 'Cloudiness', '${response.current.clouds}%'))
-      ..add(AdditionalInfo('', 'Humidity', '${response.current.humidity}%'))
-      ..add(
-          AdditionalInfo('', 'Wind speed', '${response.current.windSpeed} m/s'))
-      ..add(AdditionalInfo(
-          '', 'Wind direction', mapDegrees(response.current.windDeg)))
-      ..add(AdditionalInfo('', 'Feels like', '${response.current.feelsLike}°'))
-      ..add(AdditionalInfo('', 'Pressure', '${response.current.pressure} hPa'))
-      ..add(
-          AdditionalInfo('', 'Visibility', '${response.current.visibility} m'))
-      ..add(AdditionalInfo('', 'UV index', '${response.current.uvi}'))
-      ..add(AdditionalInfo('', 'Dew point', '${response.current.dewPoint}°'));
-    final ItemDetailsModel itemDetailsModel = ItemDetailsModel(city, country,
-        response.current.temp, response.current.weather[0].icon, daily, info);
+      ..add(AdditionalInfo('', 'Humidity', '${response.current.humidity}%'))..add(
+        AdditionalInfo(
+            '', 'Wind speed', '${response.current.windSpeed} m/s'))..add(
+        AdditionalInfo(
+            '', 'Wind direction', mapDegrees(response.current.windDeg)))..add(
+        AdditionalInfo(
+            '', 'Feels like', '${response.current.feelsLike}°'))..add(
+        AdditionalInfo(
+            '', 'Pressure', '${response.current.pressure} hPa'))..add(
+        AdditionalInfo(
+            '', 'Visibility', '${response.current.visibility} m'))..add(
+        AdditionalInfo('', 'UV index', '${response.current.uvi}'))..add(
+        AdditionalInfo('', 'Dew point', '${response.current.dewPoint}°'));
+    final ItemDetailsModel itemDetailsModel = ItemDetailsModel(
+        city,
+        country,
+        response.current.temp,
+        response.current.weather[0].icon,
+        DateFormat('HH:mm MMMM dd').format(
+            DateTime.fromMillisecondsSinceEpoch(response.current.dt * 1000)),
+        daily,
+        info);
     if (_isOdd) {
       update([itemDetailsModel]);
     } else {

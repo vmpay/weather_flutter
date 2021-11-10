@@ -1,11 +1,12 @@
 class ItemDetailsModel {
-  ItemDetailsModel(this.city, this.country, this.temp, this.icon, this.daily,
-      this.additionalInfo);
+  ItemDetailsModel(this.city, this.country, this.temp, this.icon, this.date,
+      this.daily, this.additionalInfo);
 
   final String city;
   final String country;
   final double temp;
   final String icon;
+  final String date;
   final List<DailyForecast> daily;
   final List<AdditionalInfo> additionalInfo;
 }
