@@ -9,8 +9,8 @@ import 'package:weather_flutter_architecture/view/list/weather_list_widget.dart'
 import 'custom_wave_painter.dart';
 
 class ListScreen extends StatelessWidget {
-  ListScreen({Key? key}) : super(key: key);
-  final WeatherListStore _weatherListStore = WeatherListStore(const []);
+  const ListScreen(this._weatherListStore, {Key? key}) : super(key: key);
+  final WeatherListStore _weatherListStore;
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,10 @@
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:weather_flutter_architecture/repository/repository.dart';
 import 'package:weather_flutter_architecture/repository/weather_list_response.dart';
-import 'package:weather_flutter_architecture/utils/builders.dart';
 
 class WeatherListStore extends StreamStore<Exception, List<ListElement>> {
-  WeatherListStore(List<ListElement> initialState) : super(initialState);
+  WeatherListStore(this._repository) : super(const []);
+  final Repository _repository;
   int _calls = 0;
 
   Future<void> requestWeatherList() async {
@@ -16,7 +17,7 @@ class WeatherListStore extends StreamStore<Exception, List<ListElement>> {
     if (_calls < 2) {
       update(value);
     } else if (_calls < 5) {
-      update(buildWeatherListResponse().list ?? []);
+      update(_repository.fetchWeatherList([]).list ?? []);
     } else {
       setError(Exception('Error: state not can be > 4'));
     }

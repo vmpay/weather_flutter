@@ -1,7 +1,7 @@
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_flutter_architecture/repository/repository.dart';
 import 'package:weather_flutter_architecture/repository/weather_details_response.dart';
-import 'package:weather_flutter_architecture/utils/builders.dart';
 import 'package:weather_flutter_architecture/utils/constants.dart';
 import 'package:weather_flutter_architecture/utils/degree_direction_mapper.dart';
 
@@ -9,7 +9,8 @@ import 'models/item_details_model.dart';
 
 class WeatherDetailsStore
     extends StreamStore<Exception, List<ItemDetailsModel>> {
-  WeatherDetailsStore() : super([]);
+  WeatherDetailsStore(this._repository) : super([]);
+  final Repository _repository;
   bool _isOdd = false;
   final DateFormat _daysFormat = DateFormat('EEEE');
   final DateFormat _hourFormat = DateFormat('HH:mm');
@@ -21,7 +22,8 @@ class WeatherDetailsStore
 
     await Future.delayed(const Duration(seconds: 1));
 
-    final WeatherDetailsResponse response = buildWeatherDetailsResponse();
+    final WeatherDetailsResponse response =
+        _repository.fetchWeatherDetails(lat, lon);
     final DateTime now = DateTime.now();
     final List<DailyForecast> daily = response.daily.map((e) {
       final DateTime dateTime =
@@ -53,19 +55,17 @@ class WeatherDetailsStore
           _hourFormat.format(DateTime.fromMillisecondsSinceEpoch(
               response.current.sunset! * 1000))))
       ..add(AdditionalInfo('', 'Cloudiness', '${response.current.clouds}%'))
-      ..add(AdditionalInfo('', 'Humidity', '${response.current.humidity}%'))..add(
-        AdditionalInfo(
-            '', 'Wind speed', '${response.current.windSpeed} m/s'))..add(
-        AdditionalInfo(
-            '', 'Wind direction', mapDegrees(response.current.windDeg)))..add(
-        AdditionalInfo(
-            '', 'Feels like', '${response.current.feelsLike}°'))..add(
-        AdditionalInfo(
-            '', 'Pressure', '${response.current.pressure} hPa'))..add(
-        AdditionalInfo(
-            '', 'Visibility', '${response.current.visibility} m'))..add(
-        AdditionalInfo('', 'UV index', '${response.current.uvi}'))..add(
-        AdditionalInfo('', 'Dew point', '${response.current.dewPoint}°'));
+      ..add(AdditionalInfo('', 'Humidity', '${response.current.humidity}%'))
+      ..add(
+          AdditionalInfo('', 'Wind speed', '${response.current.windSpeed} m/s'))
+      ..add(AdditionalInfo(
+          '', 'Wind direction', mapDegrees(response.current.windDeg)))
+      ..add(AdditionalInfo('', 'Feels like', '${response.current.feelsLike}°'))
+      ..add(AdditionalInfo('', 'Pressure', '${response.current.pressure} hPa'))
+      ..add(
+          AdditionalInfo('', 'Visibility', '${response.current.visibility} m'))
+      ..add(AdditionalInfo('', 'UV index', '${response.current.uvi}'))
+      ..add(AdditionalInfo('', 'Dew point', '${response.current.dewPoint}°'));
     final ItemDetailsModel itemDetailsModel = ItemDetailsModel(
         city,
         country,
