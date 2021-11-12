@@ -1,16 +1,13 @@
 # weather_flutter_architecture
 
-Flutter project showing different approaches for app architecture
+This project illustrates different Flutter state management approaches.
 
-## Getting Started
+## Implemented approaches
 
-This project is a starting point for a Flutter application.
+- [Triple Segmented State Pattern](https://triple.flutterando.com.br/) is available
+  on [master branch](https://github.com/vmpay/weather_flutter/tree/master)
 
-A few resources to get you started if this is your first Flutter project:
+## Libraries used
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials, samples, guidance on
-mobile development, and a full API reference.
+- [intl](https://pub.dev/packages/intl)
+- [flutter_modular](https://modular.flutterando.com.br/)
