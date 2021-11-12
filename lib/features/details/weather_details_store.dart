@@ -5,7 +5,7 @@ import 'package:weather_flutter_architecture/repository/weather_details_response
 import 'package:weather_flutter_architecture/utils/constants.dart';
 import 'package:weather_flutter_architecture/utils/degree_direction_mapper.dart';
 
-import 'models/item_details_model.dart';
+import 'item_details_model.dart';
 
 class WeatherDetailsStore
     extends StreamStore<Exception, List<ItemDetailsModel>> {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_triple/flutter_triple.dart';
-import 'package:weather_flutter_architecture/middleware/weather_list_store.dart';
 import 'package:weather_flutter_architecture/repository/weather_list_response.dart';
-import 'package:weather_flutter_architecture/view/list/empty_list_widget.dart';
-import 'package:weather_flutter_architecture/view/list/weather_list_widget.dart';
 
-import 'custom_wave_painter.dart';
+import 'view/custom_wave_painter.dart';
+import 'view/empty_list_widget.dart';
+import 'view/weather_list_widget.dart';
+import 'weather_list_store.dart';
 
 class ListScreen extends StatelessWidget {
   const ListScreen(this._weatherListStore, {Key? key}) : super(key: key);

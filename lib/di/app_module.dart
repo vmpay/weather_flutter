@@ -1,11 +1,11 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:weather_flutter_architecture/middleware/weather_details_store.dart';
-import 'package:weather_flutter_architecture/middleware/weather_list_store.dart';
+import 'package:weather_flutter_architecture/features/details/details_screen.dart';
+import 'package:weather_flutter_architecture/features/details/weather_details_store.dart';
+import 'package:weather_flutter_architecture/features/list/list_screen.dart';
+import 'package:weather_flutter_architecture/features/list/weather_list_store.dart';
+import 'package:weather_flutter_architecture/features/not_found_screen.dart';
+import 'package:weather_flutter_architecture/features/splash_screen.dart';
 import 'package:weather_flutter_architecture/repository/repository.dart';
-import 'package:weather_flutter_architecture/view/details/details_screen.dart';
-import 'package:weather_flutter_architecture/view/list/list_screen.dart';
-import 'package:weather_flutter_architecture/view/not_found_screen.dart';
-import 'package:weather_flutter_architecture/view/splash_screen.dart';
 
 class AppModule extends Module {
   @override

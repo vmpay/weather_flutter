@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:weather_flutter_architecture/middleware/models/item_details_model.dart';
 import 'package:weather_flutter_architecture/utils/hero_bg_mapper.dart';
-import 'package:weather_flutter_architecture/view/details/hourly_item_widget.dart';
 
+import '../item_details_model.dart';
 import 'daily_card_widget.dart';
+import 'hourly_item_widget.dart';
 
 class WeatherDetailsWidget extends StatelessWidget {
   const WeatherDetailsWidget(this._item, {Key? key}) : super(key: key);

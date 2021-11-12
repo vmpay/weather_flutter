@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:weather_flutter_architecture/middleware/models/item_details_model.dart';
 import 'package:weather_flutter_architecture/utils/constants.dart';
+
+import '../item_details_model.dart';
 
 class HourlyItemWidget extends StatelessWidget {
   const HourlyItemWidget(this._item, {Key? key}) : super(key: key);

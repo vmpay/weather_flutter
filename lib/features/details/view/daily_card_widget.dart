@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:weather_flutter_architecture/middleware/models/item_details_model.dart';
 import 'package:weather_flutter_architecture/utils/icon_mapper.dart';
+
+import '../item_details_model.dart';
 
 class DailyCardWidget extends StatelessWidget {
   const DailyCardWidget(this._daily, {Key? key}) : super(key: key);

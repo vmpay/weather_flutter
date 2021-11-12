@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_triple/flutter_triple.dart';
-import 'package:weather_flutter_architecture/middleware/models/item_details_model.dart';
-import 'package:weather_flutter_architecture/middleware/weather_details_store.dart';
-import 'package:weather_flutter_architecture/view/details/weather_details_widget.dart';
+
+import 'item_details_model.dart';
+import 'view/weather_details_widget.dart';
+import 'weather_details_store.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen(this._city, this._country, this._lat, this._lon,
