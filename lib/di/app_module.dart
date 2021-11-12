@@ -6,11 +6,13 @@ import 'package:weather_flutter_architecture/features/list/weather_list_store.da
 import 'package:weather_flutter_architecture/features/not_found_screen.dart';
 import 'package:weather_flutter_architecture/features/splash_screen.dart';
 import 'package:weather_flutter_architecture/repository/repository.dart';
+import 'package:weather_flutter_architecture/repository/weather_service.dart';
 
 class AppModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.singleton((i) => Repository()),
+        Bind.singleton((i) => Repository(i())),
+        Bind.singleton((i) => WeatherService('')),
         Bind.lazySingleton((i) => WeatherListStore(i())),
         Bind.factory((i) => WeatherDetailsStore(i())),
       ];

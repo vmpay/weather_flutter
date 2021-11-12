@@ -1,11 +1,15 @@
 import 'package:weather_flutter_architecture/repository/weather_details_response.dart';
 import 'package:weather_flutter_architecture/repository/weather_list_response.dart';
-import 'package:weather_flutter_architecture/utils/builders.dart';
+import 'package:weather_flutter_architecture/repository/weather_service.dart';
 
 class Repository {
-  WeatherListResponse fetchWeatherList(List<String> ids) =>
-      buildWeatherListResponse();
+  Repository(this._weatherService);
 
-  WeatherDetailsResponse fetchWeatherDetails(double lat, double lon) =>
-      buildWeatherDetailsResponse();
+  final WeatherService _weatherService;
+
+  Future<WeatherListResponse> fetchWeatherList(List<String> ids) =>
+      _weatherService.fetchWeatherList(ids, 'metric');
+
+  Future<WeatherDetailsResponse> fetchWeatherDetails(double lat, double lon) =>
+      _weatherService.fetchWeatherDetails(lat, lon, 'metric');
 }

@@ -11,15 +11,28 @@ class WeatherListStore extends StreamStore<Exception, List<ListElement>> {
     _calls++;
     setLoading(true);
 
-    await Future.delayed(const Duration(seconds: 1));
-
-    List<ListElement> value = <ListElement>[];
-    if (_calls < 2) {
-      update(value);
-    } else if (_calls < 5) {
-      update(_repository.fetchWeatherList([]).list ?? []);
-    } else {
-      setError(Exception('Error: state not can be > 4'));
+    try {
+      final WeatherListResponse response = await _repository.fetchWeatherList([
+        '756135',
+        '703448',
+        '2643743',
+        '964137',
+        '5308655',
+        '1850147',
+        '1070940',
+        '4180439',
+        '3441575',
+      ]);
+      List<ListElement> value = response.list ?? [];
+      if (_calls < 2) {
+        update(value);
+      } else if (_calls < 5) {
+        update(value);
+      } else {
+        setError(Exception('Error: state not can be > 4'));
+      }
+    } on Exception catch (e) {
+      setError(e);
     }
     setLoading(false);
   }
