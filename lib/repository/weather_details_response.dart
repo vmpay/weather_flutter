@@ -115,7 +115,7 @@ class Current {
   final int visibility;
   final double windSpeed;
   final int windDeg;
-  final double windGust;
+  final double? windGust;
   final List<Weather> weather;
   final Rain? rain;
   final double? pop;
