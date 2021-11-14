@@ -1,36 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_triple/flutter_triple.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_flutter_architecture/features/list/weather_list_bloc.dart';
 import 'package:weather_flutter_architecture/repository/weather_list_response.dart';
+import 'package:weather_flutter_architecture/utils/loading_value.dart';
 
 import 'view/custom_wave_painter.dart';
 import 'view/empty_list_widget.dart';
 import 'view/weather_list_widget.dart';
-import 'weather_list_store.dart';
 
-class ListScreen extends StatelessWidget {
-  const ListScreen(this._weatherListStore, {Key? key}) : super(key: key);
-  final WeatherListStore _weatherListStore;
+class ListScreen extends StatefulWidget {
+  const ListScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ListScreen> createState() => _ListScreenState();
+}
+
+class _ListScreenState extends State<ListScreen> {
+  late WeatherListBloc _bloc;
+
+  @override
+  void didChangeDependencies() {
+    _bloc = Provider.of(context);
+    _bloc.fetchWeatherList();
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _bloc.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          ScopedBuilder(
-            store: _weatherListStore,
-            onState: (context, List<ListElement> state) => state.isEmpty
-                ? const EmptyListWidget()
-                : WeatherListWidget(state),
-            onError: (context, error) => Center(
-              child: Text(
-                error.toString(),
-                style: const TextStyle(color: Colors.blue),
-              ),
-            ),
-            onLoading: (context) => const Center(
-              child: CircularProgressIndicator(),
-            ),
+          StreamBuilder(
+            stream: _bloc.weatherList,
+            builder: (context,
+                AsyncSnapshot<LoadingValue<List<ListElement>>> snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.requireData.isLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else {
+                  return snapshot.requireData.value?.isNotEmpty == true
+                      ? WeatherListWidget(snapshot.requireData.value!)
+                      : const EmptyListWidget();
+                }
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text(
+                    snapshot.error.toString(),
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                );
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
           ),
           Container(
             alignment: Alignment.bottomCenter,
@@ -81,7 +110,7 @@ class ListScreen extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         child: FloatingActionButton(
           onPressed: () {
-            _weatherListStore.requestWeatherList();
+            _bloc.fetchWeatherList();
           },
           child: const Icon(Icons.add),
           backgroundColor: const Color(0xFF4493ff),

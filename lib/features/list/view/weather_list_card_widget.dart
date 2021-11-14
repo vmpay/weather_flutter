@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_flutter_architecture/repository/weather_list_response.dart';
 import 'package:weather_flutter_architecture/utils/bg_mapper.dart';
@@ -15,7 +14,7 @@ class WeatherListCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Modular.to.pushNamed(
+        Navigator.pushNamed(context,
             '/weather/details?city=${element.name}&country=${element.sys?.country}&lat=${element.coord?.lat}&lon=${element.coord?.lon}');
       },
       child: Padding(

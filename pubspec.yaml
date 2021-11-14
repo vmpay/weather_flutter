@@ -13,10 +13,11 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.4
-  flutter_triple: ^1.2.5
   intl: ^0.17.0
-  flutter_modular: ^4.2.0
   http: ^0.13.4
+
+  rxdart: ^0.27.2
+  provider: ^6.0.1
 
 dev_dependencies:
   flutter_test:
